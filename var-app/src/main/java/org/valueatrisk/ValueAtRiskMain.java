@@ -33,11 +33,11 @@ public class ValueAtRiskMain {
                 Trade trade = trades.get(0);
                 BigDecimal var = varService.getTradeVaR(confidenceLvl, trade);
 
-                System.out.printf("VaR for trade with id: %s is %s \n",trade.id(), var);
+                System.out.printf("VaR for trade with id: %s is %f%n \n",trade.id(), var);
             } else {
                 System.out.println("Portfolio VaR calculation");
                 BigDecimal portfolioVar = varService.getPortfolioVaR(confidenceLvl, trades);
-                System.out.printf("VaR for portfolio is %s \n", portfolioVar);
+                System.out.printf("VaR for portfolio is %f%n \n", portfolioVar);
                 
                 // List<BigDecimal> individualVars = trades.stream()
                 //         .map(t -> {

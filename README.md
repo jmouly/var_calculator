@@ -1,6 +1,7 @@
 # Value at Risk Calculator
 
 Application to compute the Value at Risk (VaR) using historical values.
+The historical VaR computation method uses actual historical values of a trade of a portfolio(multiple trades) ranking those values from worst to best and selecting the loss at the desined percentile as the VaR estimate.
 
 ## Features
 - File-based input processing
@@ -39,3 +40,4 @@ You can refer to the example in /data/portfolio.txt
 
 ## Remarks on portfolio VaR calculation
 
+The portfolio VaR is often less than the sum of the individual trade VaR calculations. 

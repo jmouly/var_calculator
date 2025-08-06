@@ -80,7 +80,7 @@ public class ValueAtRiskServiceTest {
 
         BigDecimal result = service.getTradeVaR(confidenceInput,trade);
 
-        BigDecimal expected = new BigDecimal(-10);
+        BigDecimal expected = new BigDecimal(10);
         
         assertEquals(0, expected.compareTo(result));
     }
@@ -120,7 +120,7 @@ public class ValueAtRiskServiceTest {
     }
 
     @Test void getPortfolioVaR_withValidPortfolio_ShouldReturnVaR() {
-        BigDecimal confidenceInput = new BigDecimal(0.5);
+        BigDecimal confidenceInput = new BigDecimal(0.95);
         List<BigDecimal> pnlSerieInput1 = Lists.newArrayList(BigDecimal.ZERO, BigDecimal.TEN, BigDecimal.ONE, BigDecimal.TEN);
         Trade trade1 = new Trade("TESLA1", pnlSerieInput1);
 
@@ -131,8 +131,8 @@ public class ValueAtRiskServiceTest {
 
         BigDecimal result = service.getPortfolioVaR(confidenceInput,portfolio);
 
-        BigDecimal expected = new BigDecimal(-10);
+        BigDecimal expected = new BigDecimal("-13.220000");
         
-        // assertEquals(0, expected.compareTo(result));
+        assertEquals(0, expected.compareTo(result));
     }
 }

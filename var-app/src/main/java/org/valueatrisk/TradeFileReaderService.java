@@ -27,11 +27,11 @@ public class TradeFileReaderService {
         if (parts.length < 2) {
             throw new IllegalArgumentException("Invalid trade format in file. Expected 'ISIN,value1,value2,...'");
         }
-        String isin = parts[0].trim();
+        String id = parts[0].trim();
         List<BigDecimal> values = Arrays.stream(parts, 1, parts.length)
                 .map(String::trim)
                 .map(BigDecimal::new)
                 .collect(Collectors.toList());
-        return new Trade(isin, values);
+        return new Trade(id, values);
     }
 }

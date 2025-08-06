@@ -2,6 +2,7 @@ package org.valueatrisk;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -37,6 +38,16 @@ public class ValueAtRiskService {
                         .reduce(BigDecimal.ZERO, BigDecimal::add))
                 .collect(Collectors.toList());
 
+        List<BigDecimal> portfolioPnL = new ArrayList<>();
+        for (int i = 0; i < numTradeVal; i++) {
+            BigDecimal dailySum = BigDecimal.ZERO;
+            for (Trade trade : portfolio) {
+                dailySum = dailySum.add(trade.historicalPnL().get(i));
+            }
+            System.out.printf("dailySum is %f%n \n", dailySum);
+            portfolioPnL.add(dailySum);
+        }
+
         return calculateVaR(confidenceLvl, portfolioDailyPnl);
     }
     
@@ -56,32 +67,7 @@ public class ValueAtRiskService {
 
         int indexRdn = index.setScale(0, RoundingMode.FLOOR).intValue();
 
-        // The VaR is the loss at this index
-        BigDecimal tradeVaR = sortedPnl.get(indexRdn).negate();
+        BigDecimal tradeVaR = sortedPnl.get(indexRdn);
         return tradeVaR.setScale(4, RoundingMode.HALF_UP);
     }
-
-    // public BigDecimal getPorfolioVaR(BigDecimal confidenceLvl, List<List<BigDecimal>> porfolioVal) {
-    //     if (porfolioVal == null || porfolioVal.isEmpty()) {
-    //         throw new IllegalArgumentException("Portfolio PnL series cannot be null or empty");
-    //     }
-        
-    //     // Check all trades in porfolio have the same number of values in their PnL serie
-    //     int numTradeVal = porfolioVal.get(0).size();
-    //     boolean inconsistentData = porfolioVal.stream()
-    //             .anyMatch(trade -> trade.size() != numTradeVal);
-        
-    //     if (inconsistentData) {
-    //         throw new IllegalArgumentException("All trades must have the same number of historical values");
-    //     }
-
-    //     // Reduce the list of list to a daily PnL serie across all trades
-    //     List<BigDecimal> portfolioDailyPnl = IntStream.range(0, numTradeVal)
-    //             .mapToObj(i -> porfolioVal.stream()
-    //                     .map(trade -> trade.get(i))
-    //                     .reduce(BigDecimal.ZERO, BigDecimal::add))
-    //             .collect(Collectors.toList());
-
-    //     return calculateVaR(confidenceLvl, portfolioDailyPnl);
-    // }
 }
