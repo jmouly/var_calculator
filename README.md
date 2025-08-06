@@ -8,9 +8,15 @@ The historical VaR computation method uses actual historical values of a trade o
 - Single trade and portfolio VaR calculations
 - BigDecimal precision
 
+## To install the application
+```bash
+git clone https://github.com/jmouly/var_calculator.git
+```
+
 ## Build application
 
 ```bash
+cd var_calculator 
 ./gradlew build
 ```
 

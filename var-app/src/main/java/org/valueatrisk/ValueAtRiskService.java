@@ -38,16 +38,6 @@ public class ValueAtRiskService {
                         .reduce(BigDecimal.ZERO, BigDecimal::add))
                 .collect(Collectors.toList());
 
-        List<BigDecimal> portfolioPnL = new ArrayList<>();
-        for (int i = 0; i < numTradeVal; i++) {
-            BigDecimal dailySum = BigDecimal.ZERO;
-            for (Trade trade : portfolio) {
-                dailySum = dailySum.add(trade.historicalPnL().get(i));
-            }
-            System.out.printf("dailySum is %f%n \n", dailySum);
-            portfolioPnL.add(dailySum);
-        }
-
         return calculateVaR(confidenceLvl, portfolioDailyPnl);
     }
     
