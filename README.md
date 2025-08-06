@@ -4,6 +4,7 @@ Application to compute the Value at Risk (VaR) using historical values.
 The historical VaR computation method uses actual historical values of a trade of a portfolio(multiple trades) ranking those values from worst to best and selecting the loss at the desined percentile as the VaR estimate.
 
 ## Features
+- Project uses Java 21 and Gradle 9
 - File-based input processing
 - Single trade and portfolio VaR calculations
 - BigDecimal precision
