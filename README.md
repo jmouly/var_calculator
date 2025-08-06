@@ -23,15 +23,16 @@ Example:
 ./gradlew run --args="0.95 data/portfolio.txt"
 ```
 
-If the <input_file> only contains 1 line, the VaR will compute at trade level.
-If the <input_file> contains multiple lines, the VaR will be computed at portfolio level.
+- If the <input_file> only contains 1 line, the VaR will compute at trade level.
+- If the <input_file> contains multiple lines, the VaR will be computed at portfolio level.
 
 ### Parameters constraints
 
 - <input_confidence_level> should be within 0 and 1
 - <input_file> should not be empty and each line should have the following format:
-ID1,value1,value2,value3
-ID2,value1,value2,value3
+    ID1,value1,value2,value3
+
+    ID2,value1,value2,value3
 
 Please note that the number of historical values for each trades should be the same to compute the portfolio VaR.
 
